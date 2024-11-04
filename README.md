@@ -16,7 +16,7 @@ Follow the Step-by-Step Powerpoint guide to create
 # Part 2
 Modify the code in firebaseConfig.js so that it uses the Firebase Config app settings that are supplied to you 
 during the steps of setting up Firebase. Replace the code inside the ```const firebaseConfig = {}``` block with the code given to you containing the firebase settings and modified to include the database setting.
-Click on the Save Data button in your app, if it works you should get a "Data Saved Successfully" message. Now if you go back to the firebase console you should find the Joe Bloggs name and email data saved in your firestore.
+Make sure your package.json file is up to date. Click on the Save Data button in your app, if it works you should get a "Data Saved Successfully" message. Now if you go back to the firebase console you should find the Joe Bloggs name and email data saved in your firestore.
 
 # Part 3
 Add two new useState hooks for name and email (add them where the comment indicates to add them in App.js). Next add two new TextInput components. Remember to import the TextInput component. Modify the example code so that, instead of the users document with hard-coded values for name and email, the document takes values from exisiting TextInput components and saves them to the Firestore database. Uncomment the lines from the saveData function which set the name and email to blank after they have been saved.
