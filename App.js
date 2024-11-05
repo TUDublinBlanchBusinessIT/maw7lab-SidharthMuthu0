@@ -1,5 +1,5 @@
-import { Button, View, Text, StyleSheet} from 'react-native';
-import React, { useState } from 'react';
+import { Button, View, Text, StyleSheet,FlatList,TextInput,ScrollView} from 'react-native';
+import React, { useState,useEffect } from 'react';
 import { db } from './firebaseConfig';
 
 export default function App() {
@@ -26,7 +26,8 @@ export default function App() {
         { id: '3', name: 'Alice Johnson', email: 'alice.johnson@example.com' },
       ]);
   
-    //Add two useState() hooks for name and email here
+    const [name, setName] = useState(""); 
+    const [email, setEmail] = useState("");
 
     async function saveData() {
       if (db){
@@ -35,12 +36,15 @@ export default function App() {
                 //change the following two lines so that
                 //instead of using hard-coded values they
                 //take the values from the useState hooks you have setup
-                name: "Joe Bloggs",
-                email: "joeb@joeb.com",
-                //setEmail(""); //unComment this line when you have added the setEmail hook
-                //setName(""); //unComment this line when you have added the setName hook
+                name: name,
+                email: email,
+                
             });
             alert('Data saved successfully!');
+
+            setName("");
+            setEmail("");
+
         } catch (err) {
             alert(`Error adding document: ${err.message}`);
             console.error('Error adding document:', err);
@@ -49,14 +53,35 @@ export default function App() {
       else {
         alert("nodb");
       }
-    };
+    }
+
+    useEffect(() => {
+    // Fetching data from the 'users' collection
+    db.collection('users')
+      .get()
+      .then(querySnapshot => {
+        setUsers(
+          querySnapshot.docs.map(doc => ({
+            ...doc.data(),
+            id: doc.id,
+          }))
+        );
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
+  }, [db, name, email]); //the array at the end will set this useEffect to call when any one of these things changes
+
     
     //add two textInputs inside the following View - above the Button
     //the TextInputs should use onChangetext to set the value for name and email
     //stored in the useState hooks that you have set up 
     //the TextInputs should have style={styles.textbox}
     return (
+      <ScrollView>
       <View style={{ padding: 20 }}>
+      <TextInput  placeholder="Enter Name" style={styles.textbox} value={name} onChangeText={setName} />
+      <TextInput placeholder="Enter Email" style={styles.textbox} value={email} onChangeText={setEmail}/>
 
         <Button title="Save User" onPress={saveData} />
         <FlatList
@@ -65,10 +90,13 @@ export default function App() {
             renderItem={({ item }) => (
             <View style={styles.listItem}>
                 <Text style={styles.listItemText}>Name: {item.name}</Text>
+               
                 <Text style={styles.listItemText}>Email: {item.email}</Text>
             </View>
             )}
         />
       </View>
+      </ScrollView>
     );
   }
+

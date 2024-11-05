@@ -3,13 +3,13 @@ import firebase from "firebase";
 //replace the folling 9 lines with the firebaseConfig variable
 //issued to you during setup by firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDSUfrmadeupapikey-n0YdPUuSEMjig",
-  database: "https://blahblahblah.firebaseapp.com",
-  authDomain: "testfirestore-1234.firebaseapp.com",
-  projectId: "testfirestore-1234",
-  storageBucket: "testfirestore-1234.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:353f5blahblahblahf06f"
+  apiKey: "AIzaSyDCXPJ2EbBEenfYvXiB9DwTh5QNWLsSwEE",
+  database: "https://testfb8-a772e.firebaseapp.com",
+  authDomain: "mobileapplication-week7.firebaseapp.com",
+  projectId: "fir-8465a",
+  storageBucket: "fir-8465a.firebasestorage.app",
+  messagingSenderId: "771579533066",
+  appId: "1:771579533066:web:4ed7812f67d1eb830f0cf3"
 };
 
 let app;
